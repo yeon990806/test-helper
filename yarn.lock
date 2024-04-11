@@ -783,6 +783,24 @@
     unist-util-visit "^4.0.0"
     vfile "^5.0.0"
 
+"@netlify/edge-functions@^2.3.1":
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/@netlify/edge-functions/-/edge-functions-2.5.1.tgz#465b4fa51f4f37775876a0c515b1f1ee8e1793ca"
+  integrity sha512-6YGlbzxPaSqc/D2LhP4T4PXrim/vRmqpO1RwQKqVod6WCWlkdtJcAd3mGoI7efrjfND8twh7TqXtL7RRCI23qA==
+
+"@netlify/remix-edge-adapter@^3.2.1":
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/@netlify/remix-edge-adapter/-/remix-edge-adapter-3.2.1.tgz#03a18804fd1ae3693ac77fc84a3218368d59e749"
+  integrity sha512-HjKyTyAycABGiAEA9tKYhlRCyijHEc85sPLMmmRadFtKT3e2qYRb8B1cTKiybJWHy+phZJyhw1hEwopBPjE2Xw==
+  dependencies:
+    "@netlify/remix-runtime" "2.2.0"
+    isbot "^4.1.0"
+
+"@netlify/remix-runtime@2.2.0", "@netlify/remix-runtime@^2.2.0":
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/@netlify/remix-runtime/-/remix-runtime-2.2.0.tgz#7c00871d96cce2471543e35c03a4a75194c03868"
+  integrity sha512-E4b+/DDPcVF5GkbZt1sGCZ2fRO4at/WuDybJ4oXUpn5giW65KTJ8x0OBDEKZa1XI7uHEU0IAupuUNpYwVga+Pw==
+
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
   resolved "https://registry.yarnpkg.com/@nodelib/fs.scandir/-/fs.scandir-2.1.5.tgz#7619c2eb21b25483f6d167548b4cfd5a7488c3d5"
