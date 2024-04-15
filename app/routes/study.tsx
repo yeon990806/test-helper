@@ -1,5 +1,7 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import { useEffect, useRef, useState } from "react"
-import { AiFillEye, AiOutlineLeft, AiOutlineRight, AiOutlineUndo } from "react-icons/ai";
+import { AiFillEye, AiOutlineLeft, AiOutlineRight, AiOutlineUndo, AiFillProfile } from "react-icons/ai";
 import IconButton from "~/components/IconButton";
 import { cn, shuffleArray } from "~/libs/utils/func";
 import useTestStore from "~/store/useTestStore"
@@ -9,9 +11,23 @@ export default function Study () {
   const [wordList, setWordList] = useState<Array<string[]>>(content)
   const [anchor, setAnchor] = useState<number>(0);
   const [isBlinkMode, setIsBlinkMode] = useState<boolean>(false);
+  const [isHideMode, setIsHideMode] = useState<boolean>(false);
+  const [displayDesc, setDisplayDesc] = useState<boolean>(false);
   const timeRef = useRef<number | null>(null);
 
-  const onToggleBlinkMode = () => setIsBlinkMode(prev => !prev)
+  const onToggleBlinkMode = () => {
+    setIsHideMode(false);
+    setIsBlinkMode(prev => !prev);
+  }
+
+  const onToggleHideDesc = () => {
+    setIsBlinkMode(false);
+    setIsHideMode(prev => !prev);
+  }
+
+  const onToggleDisplayDesc = () => {
+    if (isHideMode) setDisplayDesc(prev => !prev);
+  }
 
   const onShuffleList = () => {
     setWordList(prevList => shuffleArray([...prevList]));
@@ -37,6 +53,17 @@ export default function Study () {
     }
   }, [isBlinkMode, wordList.length]);
 
+  useEffect(() => {
+    setAnchor(0)
+    if (!isBlinkMode) setDisplayDesc(true)
+  }, [isBlinkMode, isHideMode])
+
+  useEffect(() => {
+    if (isHideMode) {
+      setDisplayDesc(false)
+    }
+  }, [isHideMode, anchor])
+
   return (
     <main className="flex flex-col h-full">
       <section className="grid flex-1 grid-rows-2 gap-6 p-8">
@@ -45,9 +72,9 @@ export default function Study () {
             {wordList[anchor][0]}
           </h2>
         </article>
-        <article className="flex items-center justify-center border-2 rounded bg-slate-300 border-slate-400 text-slate-600">
-          <h3 className={cn("text-xl", isBlinkMode && 'opacity-0 fade-in-1s')} key={`study-word-${anchor}`}>
-            {wordList[anchor][1]}
+        <article className="flex items-center justify-center p-6 border-2 rounded bg-slate-300 border-slate-400 text-slate-600" onClick={onToggleDisplayDesc}>
+          <h3 className={cn("text-xl whitespace-pre-wrap", isBlinkMode && 'opacity-0 fade-in-1s')} key={`study-word-${anchor}`}>
+            {displayDesc && wordList[anchor][1]}
           </h3>
         </article>
       </section>
@@ -58,6 +85,9 @@ export default function Study () {
           </IconButton>
           <IconButton onClick={onShuffleList}>
             <AiOutlineUndo size={18} />
+          </IconButton>
+          <IconButton onClick={onToggleHideDesc}>
+            <AiFillProfile size={18} />
           </IconButton>
         </div>
         <div className="inline-flex gap-2">

@@ -15,7 +15,7 @@ const useTest = () => {
         defval: ''
       }) as Array<string[]>
 
-      const filteredData = jsonData.filter((v) => v[0] && v[1])
+      const filteredData: Array<string[]> = jsonData.filter((v) => v[0] && v[1]).splice(1)
 
       updateContent(filteredData)
       navigate('/menu')
