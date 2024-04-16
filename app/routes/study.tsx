@@ -36,10 +36,12 @@ export default function Study () {
 
   const onPrevAnchor = () => {
     if (anchor > 0) setAnchor(prev => prev -= 1)
+    else setAnchor(wordList.length - 1)
   }
 
   const onNextAnchor = () => {
     if (anchor < wordList.length - 1) setAnchor(prev => prev += 1)
+    else setAnchor(0)
   }
 
   useEffect(() => {
@@ -66,7 +68,7 @@ export default function Study () {
 
   return (
     <main className="flex flex-col h-full">
-      <section className="grid flex-1 grid-rows-2 gap-6 p-8">
+      <section className="grid flex-1 grid-rows-2 gap-6 p-4">
         <article className="flex items-center justify-center">
           <h2 className="text-3xl font-semibold text-slate-800">
             {wordList[anchor][0]}
@@ -91,12 +93,18 @@ export default function Study () {
           </IconButton>
         </div>
         <div className="inline-flex gap-2">
-          {anchor > 0 && <IconButton onClick={onPrevAnchor}>
+          <div className="inline-flex items-center gap-2 mr-4 text-slate-400">
+            <span className="text-slate-500">
+              {anchor + 1}
+            </span>
+            / {wordList.length}
+          </div>
+          <IconButton onClick={onPrevAnchor}>
             <AiOutlineLeft size={18} />
-          </IconButton>}
-          {anchor < wordList.length - 1 && <IconButton onClick={onNextAnchor}>
+          </IconButton>
+          <IconButton onClick={onNextAnchor}>
             <AiOutlineRight size={18} />
-          </IconButton>}
+          </IconButton>
         </div>
       </nav>
     </main>

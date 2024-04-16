@@ -8,7 +8,7 @@ const CommonHeader = () => {
   const navigate = useNavigate()
 
   return (
-    <header className="p-2">
+    <header className="p-4">
       <IconButton onClick={() => navigate(-1)}>
         <AiOutlineLeft size={18} />
       </IconButton>
