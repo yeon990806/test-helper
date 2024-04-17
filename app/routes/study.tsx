@@ -17,6 +17,7 @@ export default function Study () {
 
   const onToggleBlinkMode = () => {
     setIsHideMode(false);
+    setDisplayDesc(true);
     setIsBlinkMode(prev => !prev);
   }
 
@@ -76,7 +77,7 @@ export default function Study () {
         </article>
         <article className="flex items-center justify-center p-6 border-2 rounded bg-slate-300 border-slate-400 text-slate-600" onClick={onToggleDisplayDesc}>
           <h3 className={cn("text-xl whitespace-pre-wrap", isBlinkMode && 'opacity-0 fade-in-1s')} key={`study-word-${anchor}`}>
-            {displayDesc && wordList[anchor][1]}
+            {(!isHideMode || displayDesc) && wordList[anchor][1]}
           </h3>
         </article>
       </section>
