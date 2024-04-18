@@ -37,3 +37,5 @@ export const MenuList = [
 ]
 
 export const ProblemCount = [10, 20, 30, 50, 100]
+
+export const ExcelTemplateLink = 'https://docs.google.com/spreadsheets/d/1UrgfscOIe1Joq9HbnqNHfnFWY2TYlFFjetXOx_uxpDs/edit?usp=sharing'

@@ -5,8 +5,7 @@ import { AiFillFile, AiFillFileExcel, AiFillQuestionCircle } from "react-icons/a
 import Modal from "~/components/Modal";
 import UploadButton from "~/components/UploadButton";
 import useTest from "~/hooks/useTest";
-import { ProblemType } from "~/libs/defines/const";
-import useTestStore from "~/store/useTestStore";
+import { ExcelTemplateLink, ProblemType } from "~/libs/defines/const";
 
 export const meta: MetaFunction = () => {
   return [
@@ -39,7 +38,7 @@ export default function Index() {
         </p>
       </UploadButton>
       <div className="inline-flex items-center gap-1 rounded text-slate-600 hover:bg-neutral-200 text-md">
-        <Link to="/public/cbt_snippet.xlsx" target="_blank" className="inline-flex items-center gap-1 p-2">
+        <Link to={ExcelTemplateLink} target="_blank" className="inline-flex items-center gap-1 p-2" rel="noreferrer">
           <AiFillFileExcel size={16} />
           엑셀 스니펫 다운로드
         </Link>

@@ -15,6 +15,7 @@ export default function Study () {
   const [isBlinkMode, setIsBlinkMode] = useState<boolean>(false);
   const [isHideMode, setIsHideMode] = useState<boolean>(false);
   const [displayDesc, setDisplayDesc] = useState<boolean>(false);
+  const [reversedColumn, setReversedColumn] = useState<boolean>(false);
   const timeRef = useRef<number | null>(null);
 
   const onToggleBlinkMode = () => {
@@ -44,6 +45,7 @@ export default function Study () {
     })
 
     setWordList(list);
+    setReversedColumn(prev => !prev);
   }
 
   const onPrevAnchor = () => {
@@ -88,12 +90,12 @@ export default function Study () {
     <main className="flex flex-col h-full">
       <section className="grid flex-1 grid-rows-2 gap-6 p-4">
         <article className="flex items-center justify-center">
-          <h2 className="text-3xl font-semibold text-slate-800">
+          <h2 className={cn(`font-semibold whitespace-pre-wrap text-slate-800`, `${reversedColumn ? 'text-xl' : 'text-3xl'}`)}>
             {wordList[anchor][0]}
           </h2>
         </article>
         <article className="flex items-center justify-center p-6 border-2 rounded bg-slate-300 border-slate-400 text-slate-600" onClick={onToggleDisplayDesc}>
-          <h3 className={cn("text-xl whitespace-pre-wrap", isBlinkMode && 'opacity-0 fade-in-1s')} key={`study-word-${anchor}`}>
+          <h3 className={cn("whitespace-pre-wrap", isBlinkMode && 'opacity-0 fade-in-1s', reversedColumn ? 'text-3xl' : 'text-xl')} key={`study-word-${anchor}`}>
             {(!isHideMode || displayDesc) && wordList[anchor][1]}
           </h3>
         </article>
