@@ -1,3 +1,4 @@
+import 'react-tooltip/dist/react-tooltip.css'
 import type { LinksFunction } from "@remix-run/node";
 import CommonHeader from "./components/CommonHeader";
 import stylesheet from "~/tailwind.css?url";

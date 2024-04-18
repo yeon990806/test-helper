@@ -6,11 +6,12 @@ import Modal from "~/components/Modal";
 import UploadButton from "~/components/UploadButton";
 import useTest from "~/hooks/useTest";
 import { ExcelTemplateLink, ProblemType } from "~/libs/defines/const";
+import { detectMobileDevice } from "~/libs/utils/func";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "New Remix App" },
-    { name: "description", content: "Welcome to Remix!" },
+    { title: "Test Helper" },
+    { name: "description", content: "This web application will help you prepare for tests effectively." },
   ];
 };
 
@@ -33,9 +34,9 @@ export default function Index() {
           <AiFillFile size={18} />
           파일 업로드
         </h2>
-        <p className="mt-2 leading-tight text-md">
+        { !detectMobileDevice(window.navigator.userAgent) && <p className="mt-2 leading-tight text-md">
           버튼을 클릭하거나, 파일을 끌어다 놓으세요.
-        </p>
+        </p> }
       </UploadButton>
       <div className="inline-flex items-center gap-1 rounded text-slate-600 hover:bg-neutral-200 text-md">
         <Link to={ExcelTemplateLink} target="_blank" className="inline-flex items-center gap-1 p-2" rel="noreferrer">

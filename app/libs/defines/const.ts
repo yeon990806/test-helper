@@ -20,19 +20,23 @@ export const ProblemType = [
 export const MenuList = [
   {
     menuName: '공부하기',
-    menuRoute: '/study'
+    menuRoute: '/study',
+    ready: true,
   },
   {
     menuName: '시험보기',
-    menuRoute: '/test'
+    menuRoute: '/test',
+    ready: false,
   },
   {
     menuName: '시험내역',
-    menuRoute: '/history'
+    menuRoute: '/history',
+    ready: false,
   },
   {
     menuName: '오답노트',
-    menuRoute: '/review'
+    menuRoute: '/review',
+    ready: false,
   },
 ]
 
