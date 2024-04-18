@@ -1,12 +1,14 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+import { useNavigate } from "@remix-run/react";
 import { useEffect, useRef, useState } from "react"
-import { AiFillEye, AiOutlineLeft, AiOutlineRight, AiOutlineUndo, AiFillProfile } from "react-icons/ai";
+import { AiOutlineForward, AiOutlineLeft, AiOutlineRight, AiOutlineUndo, AiFillProfile, AiOutlineVerticalAlignMiddle } from "react-icons/ai";
 import IconButton from "~/components/IconButton";
 import { cn, shuffleArray } from "~/libs/utils/func";
 import useTestStore from "~/store/useTestStore"
 
 export default function Study () {
+  const Navigate = useNavigate()
   const { content } = useTestStore()
   const [wordList, setWordList] = useState<Array<string[]>>(content)
   const [anchor, setAnchor] = useState<number>(0);
@@ -35,6 +37,15 @@ export default function Study () {
     setAnchor(0);
   };
 
+  const onTradePosition = () => {
+    const list = wordList.map(v => {
+      const [a, b] = v
+      return [b, a]
+    })
+
+    setWordList(list);
+  }
+
   const onPrevAnchor = () => {
     if (anchor > 0) setAnchor(prev => prev -= 1)
     else setAnchor(wordList.length - 1)
@@ -44,6 +55,10 @@ export default function Study () {
     if (anchor < wordList.length - 1) setAnchor(prev => prev += 1)
     else setAnchor(0)
   }
+
+  useEffect(() => {
+    if (!content) Navigate(-1)
+  }, [Navigate, content])
 
   useEffect(() => {
     if (isBlinkMode) {
@@ -67,6 +82,8 @@ export default function Study () {
     }
   }, [isHideMode, anchor])
 
+  if (!content) return <></>
+
   return (
     <main className="flex flex-col h-full">
       <section className="grid flex-1 grid-rows-2 gap-6 p-4">
@@ -84,13 +101,16 @@ export default function Study () {
       <nav className="flex items-center justify-between px-4 pb-4">
         <div className="inline-flex gap-2">
           <IconButton onClick={onToggleBlinkMode}>
-            <AiFillEye size={18} />
+            <AiOutlineForward size={18} />
           </IconButton>
           <IconButton onClick={onShuffleList}>
             <AiOutlineUndo size={18} />
           </IconButton>
           <IconButton onClick={onToggleHideDesc}>
             <AiFillProfile size={18} />
+          </IconButton>
+          <IconButton onClick={onTradePosition}>
+            <AiOutlineVerticalAlignMiddle size={18} />
           </IconButton>
         </div>
         <div className="inline-flex gap-2">
