@@ -2,6 +2,7 @@ import { Tooltip } from "react-tooltip";
 import { useNavigate } from "@remix-run/react";
 import MenuButton from "~/components/MenuButton";
 import { MenuList } from "~/libs/defines/const";
+// import { sendMessage } from "~/libs/utils/func";
 
 export default function Menu () {
   const navigate = useNavigate()
@@ -21,6 +22,7 @@ export default function Menu () {
               <MenuButton
                 key={`menu-list-button-${i}-${v.ready.toString()}`}
                 // onClick={() => navigate(v.menuRoute)}
+                // onClick={() => sendMessage('123')}
                 data-tooltip-id="my-tooltip"
                 data-tooltip-content="준비 중입니다."
                 data-tooltip-place="top"

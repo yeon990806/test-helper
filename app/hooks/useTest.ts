@@ -18,7 +18,7 @@ const useTest = () => {
       const filteredData: Array<string[]> = jsonData.filter((v) => v[0] && v[1]).splice(1)
 
       updateContent(filteredData)
-      navigate('/menu')
+      navigate('/study')
     } catch (e) {
       console.error(e)
     }

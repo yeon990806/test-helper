@@ -24,9 +24,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
   const navigate = useNavigate()
   const {content} = useTestStore()
 
-  useLayoutEffect(()=> {
-    if (content.length == 0) navigate('/')
-  }, [content, navigate])
+  // useLayoutEffect(()=> {
+  //   if (!content || content.length == 0) navigate('/')
+  // }, [content, navigate])
 
   return (
     <html lang="en">

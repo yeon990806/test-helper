@@ -10,7 +10,7 @@ import useTestStore from "~/store/useTestStore"
 export default function Study () {
   const Navigate = useNavigate()
   const { content } = useTestStore()
-  const [wordList, setWordList] = useState<Array<string[]>>(content)
+  const [wordList, setWordList] = useState<Array<string[]>>(content || []);
   const [anchor, setAnchor] = useState<number>(0);
   const [isBlinkMode, setIsBlinkMode] = useState<boolean>(false);
   const [isHideMode, setIsHideMode] = useState<boolean>(false);
@@ -66,7 +66,7 @@ export default function Study () {
     if (isBlinkMode) {
       timeRef.current = window.setInterval(() => {
         setAnchor(prev => (prev < wordList.length - 1 ? prev + 1 : 0));
-      }, 2000);
+      }, 4000);
     } else {
       if (timeRef.current) window.clearInterval(timeRef.current);
       timeRef.current = null;
@@ -84,19 +84,20 @@ export default function Study () {
     }
   }, [isHideMode, anchor])
 
-  if (!content) return <></>
+  if (!content || !wordList || anchor === undefined) return <></>;
+  if (wordList.length === 0) Navigate(-1);
 
   return (
     <main className="flex flex-col h-full">
       <section className="grid flex-1 grid-rows-2 gap-6 p-4">
         <article className="flex items-center justify-center">
           <h2 className={cn(`font-semibold whitespace-pre-wrap text-slate-800`, `${reversedColumn ? 'text-xl' : 'text-3xl'}`)}>
-            {wordList[anchor][0]}
+            {wordList[anchor]?.[0]}
           </h2>
         </article>
         <article className="flex items-center justify-center p-6 border-2 rounded bg-slate-300 border-slate-400 text-slate-600" onClick={onToggleDisplayDesc}>
           <h3 className={cn("whitespace-pre-wrap", isBlinkMode && 'opacity-0 fade-in-1s', reversedColumn ? 'text-3xl' : 'text-xl')} key={`study-word-${anchor}`}>
-            {(!isHideMode || displayDesc) && wordList[anchor][1]}
+            {(!isHideMode || displayDesc) && wordList[anchor]?.[1]}
           </h3>
         </article>
       </section>

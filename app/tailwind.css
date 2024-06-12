@@ -12,5 +12,5 @@
 }
 
 .fade-in-1s {
-  animation: fadeIn 1ms 1s forwards;
+  animation: fadeIn 1ms 1.5s forwards;
 }
